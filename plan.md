@@ -87,25 +87,25 @@ graph TB
   
 - [x] **Core Constructs**
   - [x] `AuditTable` - DynamoDB table construct
-  - [ ] `AppSecrets` - Secrets Manager construct with props interface
-  - [ ] `AppConfig` - AWS AppConfig construct (Application, Environment, Profile)
+  - [x] `AppSecrets` - Secrets Manager construct with props interface
+  - [x] `AppConfig` - AWS AppConfig construct (Application, Environment, Profile)
 
-- [ ] **Lambda Scaffolding**
-  - [ ] Directory structure for 4 Lambda functions
-  - [ ] Placeholder handlers with logging
-  - [ ] Environment variable configuration
+- [x] **Lambda Scaffolding**
+  - [x] Directory structure for 4 Lambda functions
+  - [x] Placeholder handlers with logging
+  - [x] Environment variable configuration
 
-### Phase 2: Stack Wiring 🚧 (In Progress)
+### Phase 2: Stack Wiring ✅
 
-- [/] **CryptonautStack Integration**
-  - [ ] Import all constructs
-  - [ ] Wire Lambda functions with proper configuration
-  - [ ] Configure IAM permissions and resource grants
-  - [ ] Add API Gateway for webhook endpoint
+- [x] **CryptonautStack Integration**
+  - [x] Import all constructs
+  - [x] Wire Lambda functions with proper configuration
+  - [x] Configure IAM permissions and resource grants
+  - [ ] Add API Gateway for webhook endpoint (Phase 4)
 
-- [ ] **Verification**
-  - [ ] `cdk synth` passes
-  - [ ] `cdk deploy` to AWS account
+- [x] **Verification**
+  - [x] `cdk synth` passes
+  - [ ] `cdk deploy` to AWS account (ready when credentials obtained)
   - [ ] Manual testing of resource creation
 
 ### Phase 3: Lambda Implementation 📋 (Planned)
