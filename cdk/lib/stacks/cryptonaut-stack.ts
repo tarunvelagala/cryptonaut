@@ -3,6 +3,8 @@ import { Runtime, Function, Code } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 import * as path from 'path';
 import { AuditTable } from '../constructs/audit-table';
+import { AppSecrets } from '../constructs/app-secrets';
+import { AppConfig } from '../constructs/app-config';
 
 export class CryptonautStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -10,7 +12,14 @@ export class CryptonautStack extends cdk.Stack {
 
     // Path to the lambdas directory
     const lambdasPath = path.join(__dirname, '..', '..', '..', 'lambdas');
+
+    // Constructs
     const auditTable = new AuditTable(this, 'AuditTable');
+    const appSecrets = new AppSecrets(this, 'AppSecrets', {
+      telegramBotToken: 'REPLACE_WITH_REAL_TOKEN',
+      crewAiApiKey: 'REPLACE_WITH_REAL_KEY',
+    });
+    const appConfig = new AppConfig(this, 'AppConfig');
 
     // Lambda 1
     new Function(this, 'Lambda1', {
