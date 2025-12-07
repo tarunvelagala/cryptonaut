@@ -85,7 +85,11 @@ export class CryptonautStack extends cdk.Stack {
     notifierLambda.grantInvoke(orchestratorLambda);
     orchestratorLambda.addToRolePolicy(new cdk.aws_iam.PolicyStatement({
       actions: ['appconfig:GetLatestConfiguration', 'appconfig:StartConfigurationSession'],
-      resources: ['*'],
+      resources: [
+        `arn:aws:appconfig:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:application/${appConfig.applicationId}`,
+        `arn:aws:appconfig:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:application/${appConfig.applicationId}/environment/${appConfig.environmentId}`,
+        `arn:aws:appconfig:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:application/${appConfig.applicationId}/configurationprofile/${appConfig.configProfileId}`,
+      ],
     }));
 
     // Notifier: Write to DynamoDB, Read Telegram Secret
@@ -100,7 +104,11 @@ export class CryptonautStack extends cdk.Stack {
     auditTable.table.grantReadData(portfolioLambda);
     portfolioLambda.addToRolePolicy(new cdk.aws_iam.PolicyStatement({
       actions: ['appconfig:GetLatestConfiguration', 'appconfig:StartConfigurationSession'],
-      resources: ['*'],
+      resources: [
+        `arn:aws:appconfig:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:application/${appConfig.applicationId}`,
+        `arn:aws:appconfig:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:application/${appConfig.applicationId}/environment/${appConfig.environmentId}`,
+        `arn:aws:appconfig:${cdk.Stack.of(this).region}:${cdk.Stack.of(this).account}:application/${appConfig.applicationId}/configurationprofile/${appConfig.configProfileId}`,
+      ],
     }));
   }
 }
