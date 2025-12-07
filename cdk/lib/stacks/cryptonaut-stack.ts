@@ -2,6 +2,7 @@ import * as cdk from 'aws-cdk-lib';
 import { Runtime, Function, Code } from 'aws-cdk-lib/aws-lambda';
 import { Construct } from 'constructs';
 import * as path from 'path';
+import { AuditTable } from '../constructs/audit-table';
 
 export class CryptonautStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -9,6 +10,7 @@ export class CryptonautStack extends cdk.Stack {
 
     // Path to the lambdas directory
     const lambdasPath = path.join(__dirname, '..', '..', '..', 'lambdas');
+    const auditTable = new AuditTable(this, 'AuditTable');
 
     // Lambda 1
     new Function(this, 'Lambda1', {
@@ -16,6 +18,9 @@ export class CryptonautStack extends cdk.Stack {
       code: Code.fromAsset(lambdasPath),
       handler: 'lambda1.handler.handler',
       functionName: 'cryptonaut-lambda1',
+      environment: {
+        AUDIT_TABLE: auditTable.table.tableName,
+      },
     });
 
     // Lambda 2
