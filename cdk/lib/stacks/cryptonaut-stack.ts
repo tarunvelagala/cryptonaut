@@ -76,5 +76,31 @@ export class CryptonautStack extends cdk.Stack {
         APPCONFIG_PROFILE_ID: appConfig.configProfileId,
       },
     });
+
+    // IAM Permissions
+
+    // Orchestrator: Write to DynamoDB, Read CrewAI Secret, Invoke Notifier, Access AppConfig
+    auditTable.table.grantWriteData(orchestratorLambda);
+    appSecrets.crewAiSecret.grantRead(orchestratorLambda);
+    notifierLambda.grantInvoke(orchestratorLambda);
+    orchestratorLambda.addToRolePolicy(new cdk.aws_iam.PolicyStatement({
+      actions: ['appconfig:GetLatestConfiguration', 'appconfig:StartConfigurationSession'],
+      resources: ['*'],
+    }));
+
+    // Notifier: Write to DynamoDB, Read Telegram Secret
+    auditTable.table.grantWriteData(notifierLambda);
+    appSecrets.telegramBotSecret.grantRead(notifierLambda);
+
+    // Webhook: Read/Write DynamoDB, Read Telegram Secret
+    auditTable.table.grantReadWriteData(webhookLambda);
+    appSecrets.telegramBotSecret.grantRead(webhookLambda);
+
+    // Portfolio: Read DynamoDB, Access AppConfig
+    auditTable.table.grantReadData(portfolioLambda);
+    portfolioLambda.addToRolePolicy(new cdk.aws_iam.PolicyStatement({
+      actions: ['appconfig:GetLatestConfiguration', 'appconfig:StartConfigurationSession'],
+      resources: ['*'],
+    }));
   }
 }
