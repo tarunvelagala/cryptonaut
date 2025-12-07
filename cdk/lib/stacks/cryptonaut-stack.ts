@@ -16,7 +16,7 @@ export class CryptonautStack extends cdk.Stack {
     // Constructs
     const auditTable = new AuditTable(this, 'AuditTable');
     const appSecrets = new AppSecrets(this, 'AppSecrets', {
-      telegramBotToken: '8088622681:AAH-3uqsijF2AGxp22Qln3gq0pzSu0HN5s',
+      telegramBotToken: '8088622681:AAH-3uqsijzF2AGxp22Qln3gqOpzSuOHN5s',
       crewAiApiKey:
         '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',
     });
