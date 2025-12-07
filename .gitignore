@@ -34,7 +34,7 @@ Thumbs.db
 temp/
 
 # AWS CDK
-.cdk.out/
+cdk.out/
 cdk.context.json
 .aws-synth/
 
