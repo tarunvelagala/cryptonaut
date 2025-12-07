@@ -15,6 +15,7 @@ export class AuditTable extends Construct {
       encryption: TableEncryption.AWS_MANAGED,
       removalPolicy: RemovalPolicy.RETAIN,
       pointInTimeRecovery: true,
+      tableName: 'cryptonaut-audit-table',
     });
   }
 }
