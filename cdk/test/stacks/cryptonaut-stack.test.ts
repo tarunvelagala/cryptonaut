@@ -5,6 +5,6 @@
 // example test. To run these tests, uncomment this file along with the
 // example resource in lib/cdk-stack.ts
 test('Cryptonaut Stack placeholder test', () => {
-	// Placeholder test to ensure test runner runs.
-	expect(true).toBe(true);
+  // Placeholder test to ensure test runner runs.
+  expect(true).toBe(true);
 });

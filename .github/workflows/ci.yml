@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+
+      - name: Install CDK Dependencies
+        run: |
+          cd cdk
+          npm ci
+
+      - name: Build and Test CDK
+        run: |
+          cd cdk
+          npm run build
+          npm run lint
+          npm run format
+          npm test
+
+      - name: Synth CDK
+        if: success()
+        run: |
+          cd cdk
+          npx cdk synth
