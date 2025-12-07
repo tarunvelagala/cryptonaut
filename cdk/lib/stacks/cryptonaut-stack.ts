@@ -21,23 +21,60 @@ export class CryptonautStack extends cdk.Stack {
     });
     const appConfig = new AppConfig(this, 'AppConfig');
 
-    // Lambda 1
-    new Function(this, 'Lambda1', {
+    // Lambda Functions
+
+    // A. Crew Orchestrator
+    const orchestratorLambda = new Function(this, 'CrewOrchestrator', {
       runtime: Runtime.PYTHON_3_11,
-      code: Code.fromAsset(lambdasPath),
-      handler: 'lambda1.handler.handler',
-      functionName: 'cryptonaut-lambda1',
+      code: Code.fromAsset(path.join(lambdasPath, 'orchestrator')),
+      handler: 'main.handler',
+      functionName: 'cryptonaut-orchestrator',
       environment: {
         AUDIT_TABLE: auditTable.table.tableName,
+        APPCONFIG_APP_ID: appConfig.applicationId,
+        APPCONFIG_ENV_ID: appConfig.environmentId,
+        APPCONFIG_PROFILE_ID: appConfig.configProfileId,
+        CREWAI_SECRET_NAME: appSecrets.crewAiSecret.secretName,
+      },
+      timeout: cdk.Duration.seconds(60),
+    });
+
+    // B. Telegram Notifier
+    const notifierLambda = new Function(this, 'TelegramNotifier', {
+      runtime: Runtime.PYTHON_3_11,
+      code: Code.fromAsset(path.join(lambdasPath, 'notifier')),
+      handler: 'main.handler',
+      functionName: 'cryptonaut-notifier',
+      environment: {
+        AUDIT_TABLE: auditTable.table.tableName,
+        TELEGRAM_SECRET_NAME: appSecrets.telegramBotSecret.secretName,
       },
     });
 
-    // Lambda 2
-    new Function(this, 'Lambda2', {
+    // C. Telegram Webhook (API Handler)
+    const webhookLambda = new Function(this, 'TelegramWebhook', {
       runtime: Runtime.PYTHON_3_11,
-      code: Code.fromAsset(lambdasPath),
-      handler: 'lambda2.handler.handler',
-      functionName: 'cryptonaut-lambda2',
+      code: Code.fromAsset(path.join(lambdasPath, 'webhook')),
+      handler: 'main.handler',
+      functionName: 'cryptonaut-webhook',
+      environment: {
+        AUDIT_TABLE: auditTable.table.tableName,
+        TELEGRAM_SECRET_NAME: appSecrets.telegramBotSecret.secretName,
+      },
+    });
+
+    // D. Portfolio Engine
+    const portfolioLambda = new Function(this, 'PortfolioEngine', {
+      runtime: Runtime.PYTHON_3_11,
+      code: Code.fromAsset(path.join(lambdasPath, 'portfolio')),
+      handler: 'main.handler',
+      functionName: 'cryptonaut-portfolio',
+      environment: {
+        AUDIT_TABLE: auditTable.table.tableName,
+        APPCONFIG_APP_ID: appConfig.applicationId,
+        APPCONFIG_ENV_ID: appConfig.environmentId,
+        APPCONFIG_PROFILE_ID: appConfig.configProfileId,
+      },
     });
   }
 }
