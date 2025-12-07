@@ -52,3 +52,39 @@ jobs:
         run: |
           cd cdk
           npx cdk synth
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies and Deploy
+        run: |
+          cd cdk
+          npm ci
+          # Install lambda dependencies if needed by bundler
+          # (For standard Function with Asset, local bundling isn't happening, 
+          # but we need 'lambdas' folder present)
+          npx cdk deploy --require-approval never
