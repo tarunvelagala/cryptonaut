@@ -36,4 +36,8 @@ temp/
 # AWS CDK
 .cdk.out/
 cdk.context.json
-.aws-synth/ 
+.aws-synth/
+
+# Prettier
+.prettiercache
+coverage
