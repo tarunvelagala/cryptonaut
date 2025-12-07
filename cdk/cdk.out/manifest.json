@@ -1,28 +1,28 @@
 {
   "version": "48.0.0",
   "artifacts": {
-    "CdkStack.assets": {
+    "CryptonautStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "CdkStack.assets.json",
+        "file": "CryptonautStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "CdkStack": {
+    "CryptonautStack": {
       "type": "aws:cloudformation:stack",
       "environment": "aws://714036130996/us-west-2",
       "properties": {
-        "templateFile": "CdkStack.template.json",
+        "templateFile": "CryptonautStack.template.json",
         "terminationProtection": false,
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::714036130996:role/cdk-hnb659fds-deploy-role-714036130996-us-west-2",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::714036130996:role/cdk-hnb659fds-cfn-exec-role-714036130996-us-west-2",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-714036130996-us-west-2/587ac5e82ace1e0f9c7f44972b6f6dd696ded6876b93021c55bf0da1a45e2f15.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-714036130996-us-west-2/1513f26f17180fe37a30ef0e480a501c9405f3ba31605b49e2aacd49bf7cecaf.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "CdkStack.assets"
+          "CryptonautStack.assets"
         ],
         "lookupRole": {
           "arn": "arn:${AWS::Partition}:iam::714036130996:role/cdk-hnb659fds-lookup-role-714036130996-us-west-2",
@@ -31,29 +31,29 @@
         }
       },
       "dependencies": [
-        "CdkStack.assets"
+        "CryptonautStack.assets"
       ],
       "metadata": {
-        "/CdkStack/CDKMetadata/Default": [
+        "/CryptonautStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/CdkStack/BootstrapVersion": [
+        "/CryptonautStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/CdkStack/CheckBootstrapVersion": [
+        "/CryptonautStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "CdkStack"
+      "displayName": "CryptonautStack"
     },
     "Tree": {
       "type": "cdk:tree",

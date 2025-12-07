@@ -1,0 +1,21 @@
+{
+  "version": "48.0.0",
+  "files": {
+    "1513f26f17180fe37a30ef0e480a501c9405f3ba31605b49e2aacd49bf7cecaf": {
+      "displayName": "CryptonautStack Template",
+      "source": {
+        "path": "CryptonautStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "714036130996-us-west-2-7017d646": {
+          "bucketName": "cdk-hnb659fds-assets-714036130996-us-west-2",
+          "objectKey": "1513f26f17180fe37a30ef0e480a501c9405f3ba31605b49e2aacd49bf7cecaf.json",
+          "region": "us-west-2",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::714036130996:role/cdk-hnb659fds-file-publishing-role-714036130996-us-west-2"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

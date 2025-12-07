@@ -32,6 +32,3 @@ Thumbs.db
 *.log
 *.tmp
 temp/
-
-# CDK Outputs
-cdk.out/
