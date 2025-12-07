@@ -10,8 +10,8 @@
     "test": "jest",
     "cdk": "cdk",
     "lint": "eslint .",
-    "format": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\"",
-    "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\"",
+    "format": "prettier --check \"**/*.{js,jsx,ts,tsx,json}\" --ignore-path ../.gitignore",
+    "format:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json}\" --ignore-path ../.gitignore",
     "prepare": "husky install"
   },
   "devDependencies": {
