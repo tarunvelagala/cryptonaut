@@ -1,15 +1,9 @@
-import { Stack, StackProps } from 'aws-cdk-lib/core';
+import * as cdk from 'aws-cdk-lib';
+import { Table, AttributeType, BillingMode, TableEncryption } from 'aws-cdk-lib/aws-dynamodb';
 import { Construct } from 'constructs';
 
-export class CryptonautStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+export class CryptonautStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'CdkQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
   }
 }

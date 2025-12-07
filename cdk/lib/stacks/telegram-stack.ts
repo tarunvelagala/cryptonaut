@@ -1,10 +1,10 @@
-import { Stack, StackProps } from 'aws-cdk-lib/core';
+import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
-export class TelegramStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
+export class TelegramStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    // Add production-ready resources for Telegram integration here.
   }
 }
